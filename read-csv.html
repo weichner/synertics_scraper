@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JS Read CSV</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      table td {
+        padding: 10px;
+        border: 1px solid #000;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
+    />
+  </head>
+  <body>
+    <!--FILE PICKER -->
+    <input type="file" accept=".csv" id="picker" />
+
+    <!--DISPLAY CSV HERE-->
+    <table id="table"></table>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script></script>
+    <script>
+      window.onload = () => {
+        // FILE READER + HTML ELEMENTS
+        let reader = new FileReader(),
+          picker = document.getElementById('picker'),
+          table = document.getElementById('table');
+
+        // READ CSV ON FILE PICK
+        picker.onchange = () => reader.readAsText(picker.files[0]);
+
+        // READ THE CSV FILE & GENERATE HTML
+        reader.onload = () => {
+          // ENTIRE CSV FILE
+          let csv = reader.result;
+
+          // CLEAR HTML TABLE
+          table.innerHTML = '';
+
+          // SPLIT INTO ROWS
+          let rows = csv.split('\n');
+          let headers = rows[0].split(',');
+
+          let tHead = table.createTHead();
+          let rowHead = tHead.insertRow(-1);
+          for (let i = 0; i < headers.length; i++) {
+            let headerCell = document.createElement('th');
+            headerCell.innerHTML = headers[i];
+            rowHead.appendChild(headerCell);
+          }
+          let tBody = table.createTBody();
+
+          // LOOP TROUGH ROWS + SPLIT COLUMNS
+          for (let rowStr of rows.slice(1)) {
+            let row = rowStr.split(',');
+            let rowObject = tBody.insertRow(-1);
+            for (let i = 0; i < headers.length; i++) {
+              let cell = rowObject.insertCell(-1);
+              cell.innerHTML = +row[i];
+            }
+          }
+          $(document).ready(function () {
+            $('#table').DataTable();
+          });
+        };
+      };
+    </script>
+  </body>
+</html>
