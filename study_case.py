@@ -7,13 +7,14 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import etree
 import pandas as pd
+import sys
 
 # initializing the input parameters
-date = "2022-12-20"
-product = "EL"
-zone = "ES"
-instrument = "FTB"
-time_period = "YR"  # accepts: D for day, WE for weekend, Wk for week, M for month, Q for quarter, YR for year, PPA for purchase price allocation
+date = sys.argv[1]
+product = sys.argv[2]
+zone = sys.argv[3]
+instrument = sys.argv[4]
+time_period = sys.argv[5]
 
 # making the requests
 url = f"https://www.omip.pt/en/dados-mercado?date={date}&product={product}&zone={zone}&instrument={instrument}"

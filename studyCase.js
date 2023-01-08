@@ -56,7 +56,6 @@ async function scrapeData(url, time_period, filename, year) {
     scraped_data.d1.push($(elem).text());
   });
 
-  // shift works to pull out an element from an array
   scraped_data.d.shift(0);
   scraped_data.d1.shift(0);
 
@@ -76,9 +75,6 @@ async function scrapeData(url, time_period, filename, year) {
   fs.writeFile(`${filename}.csv`, csv_data, (err) => {
     if (err) throw err;
   });
-
-  //console.log(csv_data);
-  //console.log(json_data);
 }
 
 scrapeData(url, time_period, filename, year);
