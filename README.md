@@ -41,7 +41,3 @@
 - Open the html file in any browser
 
 - There is a file named `'html_visualization_table_2022-12-20_EL_ES_FTB'` and this example will work to test the pagination because the original table only has 10 rows.
-
-```
-
-```
