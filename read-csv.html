@@ -71,7 +71,12 @@
             let rowObject = tBody.insertRow(-1);
             for (let i = 0; i < headers.length; i++) {
               let cell = rowObject.insertCell(-1);
+              if (i === 3) {
+              cell.innerHTML = row[i];
+              } else {
               cell.innerHTML = +row[i];
+              }
+              
             }
           }
           $(document).ready(function () {
